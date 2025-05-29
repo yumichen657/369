@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>新增區塊示範</title>
+  <title>主頁</title>
   <style>
     body {
       font-family: Arial;
@@ -12,38 +12,24 @@
     button {
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #28a745;
+      background-color: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    .content-box {
-      margin-top: 20px;
-      padding: 20px;
-      border: 2px dashed #999;
-      background-color: #f9f9f9;
-    }
   </style>
 </head>
 <body>
+  <h1>你好</h1>
 
-  <h1>你好！</h1>
-  <p>好康的：</p>
-
-  <button onclick="addBox()">新增空白區塊</button>
-
-  <div id="container"></div>
+  <button onclick="goToBlankPage()">這是一個按鈕</button>
 
   <script>
-    function addBox() {
-      const newDiv = document.createElement("div");
-      newDiv.className = "content-box";
-      newDiv.innerHTML = "這是新的空白區塊，可以放內容";
-      document.getElementById("container").appendChild(newDiv);
+    function goToBlankPage() {
+      window.location.href = "blank.html";
     }
   </script>
-
 </body>
 </html>
 
