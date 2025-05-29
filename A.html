@@ -2,15 +2,66 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>空白頁</title>
+  <title>剪刀石頭布</title>
   <style>
     body {
-      background-color: white;
-      margin: 0;
+      font-family: "Arial";
+      text-align: center;
+      background-color: #f8f9fa;
+      padding: 50px;
+    }
+    h1 {
+      color: #dc3545;
+    }
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .rock { background-color: #6c757d; color: white; }
+    .paper { background-color: #007bff; color: white; }
+    .scissors { background-color: #28a745; color: white; }
+    #result {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #ff0000;
     }
   </style>
 </head>
 <body>
-  <!-- 這裡什麼都沒有，之後你可以加內容進來 -->
+
+  <h1>剪刀石頭布</h1>
+  <p>請選擇你的出拳：</p>
+
+  <button class="rock" onclick="play('石頭')">石頭</button>
+  <button class="paper" onclick="play('布')">布</button>
+  <button class="scissors" onclick="play('剪刀')">剪刀</button>
+
+  <div id="result"></div>
+
+  <script>
+    function play(playerChoice) {
+      let computerChoice = '';
+
+      // 電腦出必勝的那一招
+      if (playerChoice === '石頭') {
+        computerChoice = '布';      // 布包石頭
+      } else if (playerChoice === '布') {
+        computerChoice = '剪刀';    // 剪刀剪布
+      } else if (playerChoice === '剪刀') {
+        computerChoice = '石頭';    // 石頭砸剪刀
+      }
+
+      document.getElementById("result").innerHTML = `
+        你出了：<strong>${playerChoice}</strong><br>
+        電腦出了：<strong>${computerChoice}</strong><br><br>
+        <span style="font-weight:bold;">菜狗，多練練</span>
+      `;
+    }
+  </script>
+
 </body>
 </html>
