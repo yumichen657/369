@@ -16,10 +16,31 @@
     p {
       font-size: 18px;
     }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
-  <h1>你好！</h1>
-  <p>你好</p>
+  <h1>你好</h1>
+  
+  <button onclick="sayHello()">好康的</button>
+
+  <script>
+    function sayHello() {
+      alert("傻逼");
+    }
+  </script>
 </body>
 </html>
+
