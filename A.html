@@ -5,61 +5,103 @@
   <title>剪刀石頭布</title>
   <style>
     body {
-      font-family: "Arial";
+      font-family: "Segoe UI", sans-serif;
       text-align: center;
-      background-color: #f8f9fa;
+      background-color: #f2f2f2;
       padding: 50px;
     }
+
     h1 {
+      font-size: 2.5rem;
       color: #dc3545;
     }
+
     button {
       padding: 15px 30px;
-      margin: 10px;
-      font-size: 18px;
+      margin: 15px;
+      font-size: 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: transform 0.2s;
     }
-    .rock { background-color: #6c757d; color: white; }
-    .paper { background-color: #007bff; color: white; }
-    .scissors { background-color: #28a745; color: white; }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .rock    { background-color: #6c757d; color: white; }
+    .paper   { background-color: #007bff; color: white; }
+    .scissors{ background-color: #28a745; color: white; }
+
+    #computer-hand {
+      font-size: 60px;
+      margin: 30px 0;
+      animation: shake 1s ease-in-out 3;
+      display: none;
+    }
+
     #result {
-      margin-top: 30px;
       font-size: 24px;
-      color: #ff0000;
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(15deg); }
+      50% { transform: rotate(-15deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
     }
   </style>
 </head>
 <body>
 
   <h1>剪刀石頭布</h1>
-  <p>請選擇你的出拳：</p>
+  <p>請出拳：</p>
 
-  <button class="rock" onclick="play('石頭')">石頭</button>
-  <button class="paper" onclick="play('布')">布</button>
-  <button class="scissors" onclick="play('剪刀')">剪刀</button>
+  <button class="rock" onclick="play('石頭')">石頭 🪨</button>
+  <button class="paper" onclick="play('布')">布 📄</button>
+  <button class="scissors" onclick="play('剪刀')">剪刀 ✂️</button>
 
+  <div id="computer-hand">🤖</div>
   <div id="result"></div>
 
   <script>
     function play(playerChoice) {
-      let computerChoice = '';
+      const hand = document.getElementById("computer-hand");
+      const resultBox = document.getElementById("result");
+      hand.innerText = "🤖";
+      hand.style.display = "block";
+      hand.style.animation = "shake 1s ease-in-out 3";
+      resultBox.style.opacity = 0;
 
-      // 電腦出必勝的那一招
+      let computerChoice = '';
+      let emoji = '';
+
       if (playerChoice === '石頭') {
-        computerChoice = '布';      // 布包石頭
+        computerChoice = '布';
+        emoji = '📄';
       } else if (playerChoice === '布') {
-        computerChoice = '剪刀';    // 剪刀剪布
+        computerChoice = '剪刀';
+        emoji = '✂️';
       } else if (playerChoice === '剪刀') {
-        computerChoice = '石頭';    // 石頭砸剪刀
+        computerChoice = '石頭';
+        emoji = '🪨';
       }
 
-      document.getElementById("result").innerHTML = `
-        你出了：<strong>${playerChoice}</strong><br>
-        電腦出了：<strong>${computerChoice}</strong><br><br>
-        <span style="font-weight:bold;">菜狗，多練練</span>
-      `;
+      setTimeout(() => {
+        hand.innerText = emoji;
+
+        resultBox.innerHTML = `
+          你出了：<strong>${playerChoice}</strong><br>
+          電腦出了：<strong>${computerChoice} ${emoji}</strong><br><br>
+          <span style="color:red; font-weight:bold;">就這傻逼遊戲也能輸，菜狗😆</span>
+        `;
+        resultBox.style.opacity = 1;
+      }, 3000);
     }
   </script>
 
