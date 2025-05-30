@@ -35,10 +35,15 @@
     .scissors{ background-color: #28a745; color: white; }
 
     #computer-hand {
-      font-size: 60px;
       margin: 30px 0;
       animation: shake 1s ease-in-out 3;
       display: none;
+    }
+
+    #computer-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
     }
 
     #result {
@@ -66,38 +71,38 @@
   <button class="paper" onclick="play('布')">布 📄</button>
   <button class="scissors" onclick="play('剪刀')">剪刀 ✂️</button>
 
-  <div id="computer-hand">🤖</div>
+  <div id="computer-hand">
+    <img id="computer-img" src="hyacine-v1-6.webp" alt="準備出拳">
+  </div>
+
   <div id="result"></div>
 
   <script>
     function play(playerChoice) {
       const hand = document.getElementById("computer-hand");
+      const img = document.getElementById("computer-img");
       const resultBox = document.getElementById("result");
-      hand.innerText = "🤖";
+
+      // 重置狀態
+      img.src = "hyacine-v1-6.webp"; // 預設圖
+      img.alt = "出拳中...";
       hand.style.display = "block";
       hand.style.animation = "shake 1s ease-in-out 3";
       resultBox.style.opacity = 0;
 
       let computerChoice = '';
-      let emoji = '';
-
       if (playerChoice === '石頭') {
         computerChoice = '布';
-        emoji = '📄';
       } else if (playerChoice === '布') {
         computerChoice = '剪刀';
-        emoji = '✂️';
       } else if (playerChoice === '剪刀') {
         computerChoice = '石頭';
-        emoji = '🪨';
       }
 
       setTimeout(() => {
-        hand.innerText = emoji;
-
         resultBox.innerHTML = `
           你出了：<strong>${playerChoice}</strong><br>
-          ∆∆∆出了：<strong>${computerChoice} ${emoji}</strong><br><br>
+          ∆∆∆出了：<strong>${computerChoice}</strong><br><br>
           <span style="color:red; font-weight:bold;">就這傻逼遊戲也能輸，菜狗😆</span>
         `;
         resultBox.style.opacity = 1;
