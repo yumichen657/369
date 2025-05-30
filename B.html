@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>擲骰子遊戲</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      padding: 50px;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    .dice {
+      font-size: 80px;
+      margin: 20px;
+    }
+    #result {
+      font-size: 24px;
+      margin-top: 20px;
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>擲骰子！你 vs 電腦</h1>
+  <button onclick="rollDice()">擲骰子 🎲</button>
+
+  <div>
+    <p>你的點數：</p>
+    <div id="playerDice" class="dice">❔</div>
+
+    <p>電腦的點數：</p>
+    <div id="computerDice" class="dice">❔</div>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    function getDiceEmoji(number) {
+      const diceEmojis = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+      return diceEmojis[number - 1];
+    }
+
+    function rollDice() {
+      // 讓你永遠比電腦小一點（或平手）
+      const computer = Math.floor(Math.random() * 6) + 1;
+      const player = Math.max(1, computer - 1); // 確保你不超過它
+
+      document.getElementById("playerDice").innerText = getDiceEmoji(player);
+      document.getElementById("computerDice").innerText = getDiceEmoji(computer);
+
+      let resultText = "";
+      if (player === computer) {
+        resultText = "哇，giegie好強喔~~~";
+      } else {
+        resultText = "菜狗，罰你跳三遍不專心";
+      }
+
+      document.getElementById("result").innerText = resultText;
+    }
+  </script>
+
+</body>
+</html>
