@@ -21,6 +21,7 @@
       background-color: #007bff;
       color: white;
       cursor: pointer;
+      margin: 10px;
     }
     .dice {
       font-size: 80px;
@@ -31,12 +32,17 @@
       margin-top: 20px;
       color: #dc3545;
     }
+    #retryBtn {
+      display: none;
+      background-color: #28a745;
+    }
   </style>
 </head>
 <body>
 
   <h1>你 vs ∆∆∆</h1>
-  <button onclick="rollDice()">擲骰子 🎲</button>
+  <button id="rollBtn" onclick="rollDice()">擲骰子 🎲</button>
+  <button id="retryBtn" onclick="resetGame()">再來一次 🔁</button>
 
   <div>
     <p>你的點數：</p>
@@ -49,7 +55,8 @@
   <div id="result"></div>
 
   <script>
-    let count = 0; // 記錄擲骰次數
+    let count = 0;
+    let gameEnded = false;
 
     function getDiceEmoji(number) {
       const diceEmojis = ['⚀','⚁','⚂','⚃','⚄','⚅'];
@@ -57,33 +64,52 @@
     }
 
     function rollDice() {
-      count++; // 每次擲骰就累加
+      if (gameEnded) return;
+
+      count++;
 
       let player, computer;
 
       if (count === 100) {
-        // 第 100 次強制玩家贏
-        computer = Math.floor(Math.random() * 5) + 1; // 1～5
-        player = computer + 1; // 一定比它大
+        computer = Math.floor(Math.random() * 5) + 1;
+        player = computer + 1;
+
+        document.getElementById("playerDice").innerText = getDiceEmoji(player);
+        document.getElementById("computerDice").innerText = getDiceEmoji(computer);
+        document.getElementById("result").innerText = "哥們，你就像個傻逼";
+
+        // 停 3 秒後顯示「再來一次」
+        gameEnded = true;
+        document.getElementById("rollBtn").disabled = true;
+
+        setTimeout(() => {
+          document.getElementById("result").innerText = "哥們，你就像個傻逼";
+          document.getElementById("retryBtn").style.display = "inline-block";
+        }, 3000);
+
       } else {
-        // 平常玩家輸或平手
         computer = Math.floor(Math.random() * 6) + 1;
         player = Math.max(1, computer - 1);
+
+        document.getElementById("playerDice").innerText = getDiceEmoji(player);
+        document.getElementById("computerDice").innerText = getDiceEmoji(computer);
+
+        if (player === computer) {
+          document.getElementById("result").innerText = "哇，giegie好強喔~~~";
+        } else {
+          document.getElementById("result").innerText = "菜狗，罰你跳三遍不專心";
+        }
       }
+    }
 
-      document.getElementById("playerDice").innerText = getDiceEmoji(player);
-      document.getElementById("computerDice").innerText = getDiceEmoji(computer);
-
-      let resultText = "";
-      if (player === computer) {
-        resultText = "哇，giegie好強喔~~~";
-      } else if (player > computer) {
-        resultText = "哥們，你就像個傻逼";
-      } else {
-        resultText = "菜狗，罰你跳三遍不專心";
-      }
-
-      document.getElementById("result").innerText = resultText;
+    function resetGame() {
+      count = 0;
+      gameEnded = false;
+      document.getElementById("playerDice").innerText = "❔";
+      document.getElementById("computerDice").innerText = "❔";
+      document.getElementById("result").innerText = "";
+      document.getElementById("rollBtn").disabled = false;
+      document.getElementById("retryBtn").style.display = "none";
     }
   </script>
 
