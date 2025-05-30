@@ -2,38 +2,46 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>主頁</title>
+  <title>按就對了</title>
   <style>
     body {
-      font-family: Arial;
       text-align: center;
-      padding: 40px;
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      background-color: #f0f8ff;
     }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
+    h1 {
+      font-size: 2rem;
+    }
+    .game-button {
+      padding: 15px 30px;
+      margin: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
       background-color: #007bff;
       color: white;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .game-button:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
+
   <h1>你好</h1>
 
-  <button onclick="goToAPage()">剪刀石頭布</button>
+  <!-- 第一個按鈕：剪刀石頭布 -->
+  <button class="game-button" onclick="location.href='A.html'">
+    剪刀石頭布
+  </button>
 
-  <script>
-    function goToAPage() {
-      window.location.href = "A.html";
-  <button onclick="goToAPage()">擲骰子</button>
-  <script>
-    function goToBPage() {
-      window.location.href = "B.html";
-    }
-  </script>
+  <!-- 第二個按鈕：擲骰子遊戲 -->
+  <button class="game-button" onclick="location.href='B.html'">
+    擲骰子遊戲 🎲
+  </button>
+
 </body>
 </html>
-
