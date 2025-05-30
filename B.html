@@ -49,15 +49,27 @@
   <div id="result"></div>
 
   <script>
+    let count = 0; // 記錄擲骰次數
+
     function getDiceEmoji(number) {
       const diceEmojis = ['⚀','⚁','⚂','⚃','⚄','⚅'];
       return diceEmojis[number - 1];
     }
 
     function rollDice() {
-      // 讓你永遠比電腦小一點（或平手）
-      const computer = Math.floor(Math.random() * 6) + 1;
-      const player = Math.max(1, computer - 1); // 確保你不超過它
+      count++; // 每次擲骰就累加
+
+      let player, computer;
+
+      if (count === 100) {
+        // 第 100 次強制玩家贏
+        computer = Math.floor(Math.random() * 5) + 1; // 1～5
+        player = computer + 1; // 一定比它大
+      } else {
+        // 平常玩家輸或平手
+        computer = Math.floor(Math.random() * 6) + 1;
+        player = Math.max(1, computer - 1);
+      }
 
       document.getElementById("playerDice").innerText = getDiceEmoji(player);
       document.getElementById("computerDice").innerText = getDiceEmoji(computer);
@@ -65,6 +77,8 @@
       let resultText = "";
       if (player === computer) {
         resultText = "哇，giegie好強喔~~~";
+      } else if (player > computer) {
+        resultText = "哥們，你就像個傻逼";
       } else {
         resultText = "菜狗，罰你跳三遍不專心";
       }
