@@ -10,7 +10,7 @@
       text-align: center;
       padding: 50px;
     }
-    input, textarea {
+    textarea {
       font-size: 18px;
       padding: 10px;
       width: 80%;
@@ -30,6 +30,7 @@
       margin-left: auto;
       margin-right: auto;
       border-radius: 10px;
+      min-height: 40px;
     }
     button {
       margin-top: 30px;
@@ -45,22 +46,30 @@
 </head>
 <body>
 
-  <h1>輸入任何內容，全部轉為 <code>二進制</code></h1>
+  <h1>請輸入文字</h1>
 
-  <textarea id="inputArea" rows="4" placeholder="請輸入文字..."></textarea>
-  <div id="output">二進制</div>
+  <textarea id="inputArea" rows="4" placeholder="請輸入..."></textarea>
+  <div id="output"></div>
 
   <button onclick="location.href='index.html'">回首頁</button>
 
   <script>
-    const output = document.getElementById("output");
     const input = document.getElementById("inputArea");
+    const output = document.getElementById("output");
 
-    input.addEventListener("input", () => {
-      if (input.value.trim() === "") {
-        output.innerText = "";
-      } else {
+    function showBinary() {
+      if (input.value.trim() !== "") {
         output.innerText = "二進制";
+      } else {
+        output.innerText = "";
+      }
+    }
+
+    input.addEventListener("blur", showBinary);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();  // 防止換行
+        showBinary();
       }
     });
   </script>
