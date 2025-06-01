@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>二進治輸入器</title>
+  <title>二進制轉換</title>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -19,9 +19,21 @@
     h1 {
       color: #cc0000;
     }
+    #output {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #333;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 10px;
+    }
     button {
+      margin-top: 30px;
       padding: 10px 20px;
-      margin-top: 20px;
       font-size: 16px;
       background-color: #007bff;
       color: white;
@@ -33,24 +45,23 @@
 </head>
 <body>
 
-  <h1>輸入什麼都會變成 <code>二進制</code></h1>
+  <h1>輸入任何內容，全部轉為 <code>二進制</code></h1>
 
-  <input type="text" placeholder="輸入" />
-  <br>
-  <textarea rows="5" placeholder="這裡也會中招 😈"></textarea>
-  <br><br>
+  <textarea id="inputArea" rows="4" placeholder="請輸入文字..."></textarea>
+  <div id="output">二進制</div>
+
   <button onclick="location.href='index.html'">回首頁</button>
 
   <script>
-    const trollText = "二進制";
+    const output = document.getElementById("output");
+    const input = document.getElementById("inputArea");
 
-    function handleInput(e) {
-      const el = e.target;
-      el.value = trollText;
-    }
-
-    document.querySelectorAll('input, textarea').forEach(el => {
-      el.addEventListener('input', handleInput);
+    input.addEventListener("input", () => {
+      if (input.value.trim() === "") {
+        output.innerText = "";
+      } else {
+        output.innerText = "二進制";
+      }
     });
   </script>
 
